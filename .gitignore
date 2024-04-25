@@ -1,0 +1,29 @@
+# Node.js
+node_modules/
+
+# Nest.js
+dist/
+.env
+
+# Logs
+logs/
+*.log
+
+# Build artifacts
+build/
+out/
+
+# Dependency lock files
+package-lock.json
+yarn.lock
+
+# IDE files
+.vscode/
+.idea/
+
+# Testing
+coverage/
+
+# Miscellaneous
+.DS_Store
+Thumbs.db

@@ -2,7 +2,7 @@
 ## Cloning
 
 ```bash
-$ git clone #
+$ git clone https://github.com/aceiny/Micro-Hack-Hackthon-.git
 ```
 
 ## Installation
@@ -22,4 +22,9 @@ $ npm run start:dev
 
 # production mode
 $ npm run start:prod
+```
+## Api docs
+
+```bash
+/api
 ```

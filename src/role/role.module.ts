@@ -8,7 +8,7 @@ import { JWTModule } from "src/jwt/jwt.module";
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: Role.name, schema: RoleSchema }]),
-    JWTModule
+    JWTModule,
   ],
   providers: [RoleService],
   controllers: [RoleController],

@@ -1,4 +1,13 @@
-import { Body, Controller, Get, Param, Post, UseGuards, UsePipes, ValidationPipe } from "@nestjs/common";
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  UseGuards,
+  UsePipes,
+  ValidationPipe,
+} from "@nestjs/common";
 import { RoleService } from "./role.service";
 import { Organisation } from "src/organisation/organisation.schema";
 import { ObjectId } from "mongoose";
@@ -10,26 +19,28 @@ import { Roles } from "src/jwt/roles.decorator";
 import { CreateRoleDto } from "./role.types";
 import { ValidateObjectId } from "src/global/validate.objectid";
 import { ApiTags } from "@nestjs/swagger";
-@ApiTags('Role')
+@ApiTags("Role")
 @Controller("role")
 export class RoleController {
-    constructor(
-        private readonly roleService: RoleService,
-    ) {}
+  constructor(private readonly roleService: RoleService) {}
 
-    @UseGuards(AuthGuard())
-    @Get("/:id")
-    async GetRoles(@Param("id" , new ValidateObjectId()) OrganisationId: ObjectId){
-        return this.roleService.GetRoles(OrganisationId);
-    }
+  @UseGuards(AuthGuard())
+  @Get("/:id")
+  async GetRoles(
+    @Param("id", new ValidateObjectId()) OrganisationId: ObjectId,
+  ) {
+    return this.roleService.GetRoles(OrganisationId);
+  }
 
-    @UseGuards(AuthGuard())
-    @UseGuards(RolesGuard)
-    @Roles(AccountType.ORGANISATION)
-    @UsePipes(ValidationPipe)
-    @Post("/create")
-    async CreateRole(@Body() RoleDto : CreateRoleDto , @GetUser() Organisation: any) {
-        return this.roleService.CreateRole(RoleDto ,Organisation.Id);
-    }
-
+  @UseGuards(AuthGuard())
+  @UseGuards(RolesGuard)
+  @Roles(AccountType.ORGANISATION)
+  @UsePipes(ValidationPipe)
+  @Post("/create")
+  async CreateRole(
+    @Body() RoleDto: CreateRoleDto,
+    @GetUser() Organisation: any,
+  ) {
+    return this.roleService.CreateRole(RoleDto, Organisation.Id);
+  }
 }

@@ -1,4 +1,3 @@
-
 ## Cloning
 
 ```bash
@@ -23,11 +22,13 @@ $ npm run start:dev
 # production mode
 $ npm run start:prod
 ```
+
 ## Api docs
 
 ```bash
 /api
 ```
+
 ## Database schema
 
 ```bash

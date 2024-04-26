@@ -1,37 +1,28 @@
-import { Module } from '@nestjs/common';
-import { AuthController } from './auth.controller';
-import { AuthService } from './auth.service';
-import { MongooseModule } from '@nestjs/mongoose';
-import { User, UserSchema } from './auth.schema';
-import { JwtModule } from '@nestjs/jwt';
-import { PassportModule } from '@nestjs/passport';
-import { JwtStrategy } from '../jwt/jwt.strategy';
-import { RolesGuard } from '../jwt/role.guard';
-require('dotenv').config()
+import { Module } from "@nestjs/common";
+import { AuthController } from "./auth.controller";
+import { AuthService } from "./auth.service";
+import { MongooseModule } from "@nestjs/mongoose";
+import { User, UserSchema } from "./auth.schema";
+import { JwtModule } from "@nestjs/jwt";
+import { PassportModule } from "@nestjs/passport";
+import { JwtStrategy } from "../jwt/jwt.strategy";
+import { RolesGuard } from "../jwt/role.guard";
+require("dotenv").config();
 @Module({
   imports: [
     PassportModule.register({
-      defaultStrategy : 'jwt'
+      defaultStrategy: "jwt",
     }),
     JwtModule.register({
-      secret : process.env.JWT_SECRET,
-      signOptions : { 
-        expiresIn : '1d' 
-      }
+      secret: process.env.JWT_SECRET,
+      signOptions: {
+        expiresIn: "1d",
+      },
     }),
-    MongooseModule.forFeature([{name : User.name , schema : UserSchema }])
+    MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
   ],
   controllers: [AuthController],
-  providers: [
-    AuthService,
-    JwtStrategy,
-   RolesGuard, 
-  ],
-  exports : [
-    JwtStrategy,
-    PassportModule,
-    JwtModule
-  ]
-
+  providers: [AuthService, JwtStrategy, RolesGuard],
+  exports: [JwtStrategy, PassportModule, JwtModule],
 })
 export class AuthModule {}

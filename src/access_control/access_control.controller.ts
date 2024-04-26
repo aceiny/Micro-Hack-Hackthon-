@@ -1,4 +1,4 @@
-import { Controller } from '@nestjs/common';
+import { Controller } from "@nestjs/common";
 
-@Controller('access-control')
+@Controller("access-control")
 export class AccessControlController {}

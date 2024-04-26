@@ -57,4 +57,11 @@ export class UserService {
       Token: this.jwtService.sign({ Id: user._id, Role: AccountType.WORKER }),
     };
   }
+  async GetUserData( UserId : ObjectId){
+    const user = await this.userModel.findById(UserId)
+    if(!user) {
+      throw new UnauthorizedException("User not found")
+    }
+    return user
+  }
 }

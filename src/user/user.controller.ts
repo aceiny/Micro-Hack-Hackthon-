@@ -16,15 +16,11 @@ import { Roles } from "src/jwt/roles.decorator";
 import { AccountType } from "src/global/global.enums";
 import { GetUser } from "src/jwt/get-user.decorator";
 import { ApiTags } from "@nestjs/swagger";
+import { ObjectId } from "mongoose";
 @ApiTags("User")
 @Controller("user")
 export class UserController {
   constructor(private readonly userService: UserService) {}
-
-  @Get("")
-  async GetUsers() {
-    return this.userService.GetUsers();
-  }
 
   @UseGuards(AuthGuard())
   @UseGuards(RolesGuard)
@@ -50,5 +46,10 @@ export class UserController {
       Message : "valid token",
       StatusCode : 200,
     }
+  }
+  @Get('')
+  @UseGuards(AuthGuard())
+  async GetUserData(@GetUser() UserId : any){
+    return this.userService.GetUserData(UserId.Id)
   }
 }

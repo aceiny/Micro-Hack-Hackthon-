@@ -6,6 +6,8 @@ import { RolesGuard } from "src/jwt/role.guard";
 import { AuthGuard } from "@nestjs/passport";
 import { AccountType } from "src/global/global.enums";
 import { GetUser } from "src/jwt/get-user.decorator";
+import { ApiTags } from "@nestjs/swagger";
+@ApiTags("User-Role")
 @Controller("user-role")
 export class UserRoleController {
   constructor(private readonly userRoleService: UserRoleService) {}

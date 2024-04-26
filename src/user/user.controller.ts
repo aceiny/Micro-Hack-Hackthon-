@@ -43,9 +43,9 @@ export class UserController {
     return this.userService.LoginUser(LoginDto);
   }
 
-  @Get('/:id')
+  @Get('/:token')
   @UseGuards(AuthGuard())
-  async CheckUserToken(@Param('id') Token : string) {
+  async CheckUserToken(@Param('token') Token : string) {
     return {
       Message : "valid token",
       StatusCode : 200,

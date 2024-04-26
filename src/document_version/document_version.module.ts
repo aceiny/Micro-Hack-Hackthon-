@@ -15,5 +15,6 @@ import {
   ],
   controllers: [DocumentVersionController],
   providers: [DocumentVersionService],
+  exports : [DocumentVersionService]
 })
 export class DocumentVersionModule {}

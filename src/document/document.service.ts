@@ -9,13 +9,16 @@ import { Organisation } from "src/organisation/organisation.schema";
 import { User } from "src/user/user.schema";
 import * as unzipper from 'unzipper';
 import { NotFoundError } from "rxjs";
+import { Document_Version } from "src/document_version/document_version.schema";
+import { DocumentVersionService } from "src/document_version/document_version.service";
 @Injectable()
 export class DocumentService {
     constructor(
         @InjectModel(Document.name)
         private readonly documentModel: Model<Document>,
         @InjectModel(User.name)
-        private readonly userModel : Model<User>
+        private readonly userModel : Model<User>,
+        private readonly documentVersionModel : DocumentVersionService
     ){}
 
     async uploadFiles(files: any , UserId: ObjectId , UserRole: string) {
@@ -62,6 +65,8 @@ export class DocumentService {
             };
 
             const newDocument = await this.documentModel.create(body);
+            await this.documentVersionModel.CreateNewDocumentVersion(newDocument._id , Path);
+
         }
 
         await archive.finalize();

@@ -6,6 +6,7 @@ import { Document, DocumentSchema } from "./document.schema";
 import { Organisation, OrganisationSchema } from "src/organisation/organisation.schema";
 import { User, UserSchema } from "src/user/user.schema";
 import { JWTModule } from "src/jwt/jwt.module";
+import { DocumentVersionModule } from "src/document_version/document_version.module";
 
 @Module({
   imports: [
@@ -15,7 +16,8 @@ import { JWTModule } from "src/jwt/jwt.module";
     MongooseModule.forFeature([
       { name: User.name, schema: UserSchema },
     ]),
-    JWTModule
+    JWTModule, 
+    DocumentVersionModule
   ],
   providers: [DocumentService],
   controllers: [DocumentController],

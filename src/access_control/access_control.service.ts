@@ -17,7 +17,9 @@ export class AccessControlService {
         private readonly userroleModel : Model<User_Role>
     ){}
     async CheckUserAcces(UserId : ObjectId , DocumentId : ObjectId) {
-        const UserRoles = await this.userroleModel.find({})
+        const UserRoles = await this.userroleModel.find({
+            User_Id : UserId
+        })
         const AccessableRoles = await this.accesscontrolModel.find({
             Document_Id : DocumentId,
         })

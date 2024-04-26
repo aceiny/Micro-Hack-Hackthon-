@@ -8,10 +8,12 @@ export class Document_Version extends Doc {
     ref: "Document",
   })
   Document_Id: ObjectId;
+  
   @Prop()
   Version_Number: number;
-  /*@Prop()
-    Document_Content : Blob*/
+
+  @Prop()
+  Path : string
 }
 
 export const Document_VersionSchema =

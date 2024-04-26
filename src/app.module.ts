@@ -21,6 +21,6 @@ require("dotenv").config();
     AccessControlModule,
   ],
   controllers: [],
-  providers: [DocumentService],
+  providers: [],
 })
 export class AppModule {}

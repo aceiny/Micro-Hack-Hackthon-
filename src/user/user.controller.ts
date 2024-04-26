@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Get,
+  Param,
   Post,
   UseGuards,
   UsePipes,
@@ -40,5 +41,14 @@ export class UserController {
   @Post("/login")
   async LoginUser(@Body() LoginDto: LoginUserDto) {
     return this.userService.LoginUser(LoginDto);
+  }
+
+  @Get('/:id')
+  @UseGuards(AuthGuard())
+  async CheckUserToken(@Param('id') Token : string) {
+    return {
+      Message : "valid token",
+      StatusCode : 2000,
+    }
   }
 }

@@ -1,6 +1,6 @@
 import { ObjectId } from "mongoose";
 
-class AssignAccessControl {
+export class AssignAccessControl {
   Role_Id: ObjectId;
   Can_View: boolean;
   Can_Edit: boolean;

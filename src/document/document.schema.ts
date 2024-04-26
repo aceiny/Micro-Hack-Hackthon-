@@ -8,16 +8,27 @@ export class Document extends Doc {
     ref: "User",
   })
   Document_Author: ObjectId;
-
   @Prop()
+  FileSize: number;
+  @Prop()
+  Mimetype : string;
+  @Prop()
+  Filename : string;
+  @Prop()
+  Original_Name : string;
+  @Prop()
+  Encoding : string;
+  @Prop()
+  Path : string;
+
+/*  @Prop()
   Document_Description: string;
-
-  @Prop()
-  Document_Name: string;
-
+*/
   /*@Prop()
     Document_Content:blob*/
-  @Prop()
+  @Prop({
+    default : 1
+  })
   Current_Version: number;
 
   @Prop({

@@ -7,6 +7,12 @@ export class Organisation extends Document {
   Name: string;
   @Prop()
   Domain_Name: string;
+  @Prop()
+  Email: string;
+  @Prop()
+  Password: string;
+  @Prop()
+  Number_Of_Employees: number;
 }
 
 export const OrganisationSchema = SchemaFactory.createForClass(Organisation);

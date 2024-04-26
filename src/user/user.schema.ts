@@ -16,8 +16,8 @@ export class User extends Document {
   @Prop()
   Is_Active: boolean;
   @Prop({
-    type : Types.ObjectId,
-    ref : 'Organisation'
+    type: Types.ObjectId,
+    ref: "Organisation",
   })
   Organisation_Id: ObjectId;
 }

@@ -1,8 +1,9 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { Type } from "class-transformer";
 import { Document, ObjectId, Types } from "mongoose";
 
-@Schema()
+@Schema({
+  timestamps: true,
+})
 export class Role extends Document {
   @Prop({
     type: Types.ObjectId,

@@ -1,7 +1,9 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Document as Doc, ObjectId, Types } from "mongoose";
 
-@Schema()
+@Schema({
+  timestamps: true,
+})
 export class Access_Control extends Doc {
   @Prop({
     type: Types.ObjectId,

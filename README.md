@@ -28,3 +28,8 @@ $ npm run start:prod
 ```bash
 /api
 ```
+## Database schema
+
+```bash
+https://dbdiagram.io/d/662b115d03593b6b6101dbf8
+```

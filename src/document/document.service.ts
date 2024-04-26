@@ -18,7 +18,7 @@ export class DocumentService {
         private readonly documentModel: Model<Document>,
         @InjectModel(User.name)
         private readonly userModel : Model<User>,
-        private readonly documentVersionModel : DocumentVersionService
+        private readonly documentVersionModel : DocumentVersionService,
     ){}
 
     async uploadFiles(files: any , UserId: ObjectId , UserRole: string) {
@@ -63,7 +63,12 @@ export class DocumentService {
                 Document_Author: UserId,
                 Organisation_Id
             };
-
+            console.log(Mimetype)
+            if(file.mimetype == 'application/pdf') {
+                const Text_Path = `/uploads/${Filename}-text.txt`;
+                body['Text_Path'] = Text_Path;
+                fs.writeFileSync(`./uploads/${Filename}-text.txt`, 'Hello World');
+            }
             const newDocument = await this.documentModel.create(body);
             await this.documentVersionModel.CreateNewDocumentVersion(newDocument._id , Path);
 

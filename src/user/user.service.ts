@@ -12,11 +12,14 @@ import * as bcrypt from "bcrypt";
 import { JwtService } from "@nestjs/jwt";
 import { AccountType } from "src/global/global.enums";
 import { RedisService } from "src/redis/redis.service";
+import { Organisation } from "src/organisation/organisation.schema";
 @Injectable()
 export class UserService {
   constructor(
     @InjectModel(User.name)
     private readonly userModel: Model<User>,
+    @InjectModel(Organisation.name)
+    private readonly organisationModel: Model<Organisation>,
     private readonly jwtService: JwtService,
     private readonly redisService: RedisService,
   ) {}
@@ -88,7 +91,7 @@ export class UserService {
         try {
           return this.redisService.GetKey(`organisation-${UserId}`);
         } catch (error) {
-          const user = await this.userModel.findById(UserId)
+          const user = await this.organisationModel.findById(UserId)
           if(!user) {
             throw new UnauthorizedException("organisation not found")
           }
@@ -96,7 +99,7 @@ export class UserService {
         }
       }
       else {
-        const user = await this.userModel.findById(UserId)
+        const user = await this.organisationModel.findById(UserId)
         if(!user) {
           throw new UnauthorizedException("organisation not found")
         }

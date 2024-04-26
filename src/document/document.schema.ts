@@ -43,6 +43,11 @@ export class Document extends Doc {
     ref: "Organisation",
   })
   Organisation_Id: ObjectId;
+
+  @Prop({
+    default : ""
+  })
+  Text_Path : string;
 }
 
 export const DocumentSchema = SchemaFactory.createForClass(Document);

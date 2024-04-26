@@ -11,12 +11,14 @@ import { CreateUserDto, LoginUserDto } from "./user.types";
 import * as bcrypt from "bcrypt";
 import { JwtService } from "@nestjs/jwt";
 import { AccountType } from "src/global/global.enums";
+import { RedisService } from "src/redis/redis.service";
 @Injectable()
 export class UserService {
   constructor(
     @InjectModel(User.name)
     private readonly userModel: Model<User>,
     private readonly jwtService: JwtService,
+    private readonly redisService: RedisService,
   ) {}
   async GetUsers() {
     return this.userModel.find();
@@ -57,11 +59,50 @@ export class UserService {
       Token: this.jwtService.sign({ Id: user._id, Role: AccountType.WORKER }),
     };
   }
-  async GetUserData( UserId : ObjectId){
-    const user = await this.userModel.findById(UserId)
-    if(!user) {
-      throw new UnauthorizedException("User not found")
+  async GetUserData( UserId : ObjectId , UserRole : string){
+    if (UserRole == AccountType.WORKER) {
+      const IsCashed = await this.redisService.KeyExists(`user-${UserId}`)
+      if(IsCashed) {
+        try {
+          return this.redisService.GetKey(`user-${UserId}`);
+        } catch (error) {
+          const user = await this.userModel.findById(UserId)
+          if(!user) {
+            throw new UnauthorizedException("User not found")
+          }
+          return user
+        }
+      }
+      else {
+        const user = await this.userModel.findById(UserId)
+        if(!user) {
+          throw new UnauthorizedException("User not found")
+        }
+        await this.redisService.SetKey(`user-${UserId}` , user)
+        return user
+      }
     }
-    return user
+    else {
+      const IsCashed = await this.redisService.KeyExists(`organisation-${UserId}`)
+      if(IsCashed) {
+        try {
+          return this.redisService.GetKey(`organisation-${UserId}`);
+        } catch (error) {
+          const user = await this.userModel.findById(UserId)
+          if(!user) {
+            throw new UnauthorizedException("organisation not found")
+          }
+          return user
+        }
+      }
+      else {
+        const user = await this.userModel.findById(UserId)
+        if(!user) {
+          throw new UnauthorizedException("organisation not found")
+        }
+        await this.redisService.SetKey(`organisation-${UserId}` , user)
+        return user
+      }
+    }
   }
 }

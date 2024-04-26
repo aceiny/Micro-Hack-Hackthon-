@@ -8,12 +8,12 @@ export class RedisService {
         private readonly redisClient: Redis,
     ) {}
 
-    async GetKey(key: string): Promise<string> {
-        return this.redisClient.get(key);
+    async GetKey(key: string): Promise<any> {
+        return JSON.parse(await this.redisClient.get(key));
       }
     
-    async SetKey(key: string, value: string): Promise<void> {
-        await this.redisClient.set(key, value);
+    async SetKey(key: string, value: any): Promise<any> {
+        return await this.redisClient.set(key, JSON.stringify(value));
       }
 
     async KeyExists(key: string): Promise<boolean> {

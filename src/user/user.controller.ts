@@ -49,7 +49,7 @@ export class UserController {
   }
   @Get('')
   @UseGuards(AuthGuard())
-  async GetUserData(@GetUser() UserId : any){
-    return this.userService.GetUserData(UserId.Id)
+  async GetUserData(@GetUser() User : any){
+    return this.userService.GetUserData(User.Id , User.Role )
   }
 }

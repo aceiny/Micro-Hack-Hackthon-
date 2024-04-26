@@ -22,12 +22,6 @@ export class Document extends Doc {
   Encoding : string;
   @Prop()
   Path : string;
-
-/*  @Prop()
-  Document_Description: string;
-*/
-  /*@Prop()
-    Document_Content:blob*/
   @Prop({
     default : 1
   })

@@ -1,6 +1,5 @@
 import { Module } from "@nestjs/common";
 import { MongooseModule } from "@nestjs/mongoose";
-import { AuthModule } from "./auth/auth.module";
 import { OrganisationModule } from "./organisation/organisation.module";
 import { UserModule } from "./user/user.module";
 import { DocumentService } from "./document/document.service";
@@ -13,7 +12,6 @@ require("dotenv").config();
 @Module({
   imports: [
     MongooseModule.forRoot(process.env.MONGO_URI),
-    AuthModule,
     OrganisationModule,
     UserModule,
     DocumentModule,

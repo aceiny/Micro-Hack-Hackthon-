@@ -1,6 +1,6 @@
 import { IsEmail, IsNotEmpty, IsString, isNotEmpty } from "class-validator";
 
-class CreateOrganisationDto {
+export class CreateOrganisationDto {
   @IsString()
   Name: string;
   @IsEmail()
@@ -11,4 +11,10 @@ class CreateOrganisationDto {
   Domain_Name: string;
   @IsNotEmpty()
   Number_Of_Employees: number;
+}
+export class LoginOrganisationDto {
+  @IsString()
+  Email: string;
+  @IsString()
+  Password: string;
 }

@@ -5,12 +5,16 @@ import { Document } from "mongoose";
 export class Organisation extends Document {
   @Prop()
   Name: string;
+
   @Prop()
   Domain_Name: string;
+
   @Prop()
   Email: string;
+
   @Prop()
   Password: string;
+
   @Prop()
   Number_Of_Employees: number;
 }

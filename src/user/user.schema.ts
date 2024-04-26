@@ -3,19 +3,34 @@ import { Document, ObjectId, Types } from "mongoose";
 
 @Schema()
 export class User extends Document {
-  @Prop()
+  @Prop({
+    required: true,
+  })
   Fullname: string;
-  @Prop()
+
+  @Prop({
+    required: true,
+  })
   Username: string;
+
   @Prop()
   Password: string;
-  @Prop()
+
+  @Prop({
+    required: true,
+  })
   Email: string;
+
   @Prop()
   Phone: string;
-  @Prop()
-  Is_Active: boolean;
+
   @Prop({
+    default: true,
+  })
+  Is_Active: boolean;
+
+  @Prop({
+    required: true,
     type: Types.ObjectId,
     ref: "Organisation",
   })

@@ -5,14 +5,14 @@ import { Document, ObjectId, Types } from "mongoose";
 @Schema()
 export class Role extends Document {
   @Prop({
-    type : Types.ObjectId,
-    ref : "Organisation"
+    type: Types.ObjectId,
+    ref: "Organisation",
   })
-  Organisation_Id:ObjectId
+  Organisation_Id: ObjectId;
   @Prop()
-  Role_Name:string
+  Role_Name: string;
   @Prop()
-  Description:string
+  Description: string;
 }
 
 export const RoleSchema = SchemaFactory.createForClass(Role);

@@ -9,7 +9,8 @@ import { AccountType } from "src/global/global.enums";
 import { Roles } from "src/jwt/roles.decorator";
 import { CreateRoleDto } from "./role.types";
 import { ValidateObjectId } from "src/global/validate.objectid";
-
+import { ApiTags } from "@nestjs/swagger";
+@ApiTags('Role')
 @Controller("role")
 export class RoleController {
     constructor(

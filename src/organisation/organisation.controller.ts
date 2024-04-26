@@ -11,7 +11,9 @@ import {
   CreateOrganisationDto,
   LoginOrganisationDto,
 } from "./organisation.types";
+import { ApiTags } from "@nestjs/swagger";
 
+@ApiTags('Organisation')
 @Controller("organisation")
 export class OrganisationController {
   constructor(private readonly organisationService: OrganisationService) {}

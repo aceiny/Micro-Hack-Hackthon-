@@ -14,7 +14,7 @@ import { RolesGuard } from "src/jwt/role.guard";
 import { Roles } from "src/jwt/roles.decorator";
 import { AccountType } from "src/global/global.enums";
 import { GetUser } from "src/jwt/get-user.decorator";
-
+@ApiTags('User')
 @Controller("user")
 export class UserController {
   constructor(private readonly userService: UserService) {}

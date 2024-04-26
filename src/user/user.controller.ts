@@ -14,6 +14,7 @@ import { RolesGuard } from "src/jwt/role.guard";
 import { Roles } from "src/jwt/roles.decorator";
 import { AccountType } from "src/global/global.enums";
 import { GetUser } from "src/jwt/get-user.decorator";
+import { ApiTags } from "@nestjs/swagger";
 @ApiTags('User')
 @Controller("user")
 export class UserController {

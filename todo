@@ -5,7 +5,3 @@ add getting all dov version
 
 
 on creating document assign Global acces to global if no roles is specified 
-
-
-check roles assigned to the user 
-compare if one of theme is is acces obj

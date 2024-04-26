@@ -48,7 +48,7 @@ export class UserController {
   async CheckUserToken(@Param('id') Token : string) {
     return {
       Message : "valid token",
-      StatusCode : 2000,
+      StatusCode : 200,
     }
   }
 }

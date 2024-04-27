@@ -26,7 +26,7 @@ $ npm run start:prod
 ## Api docs
 
 ```bash
-/api
+https://lionfish-app-5ggjo.ondigitalocean.app/api
 ```
 
 ## Database schema

@@ -70,7 +70,7 @@ export class DocumentService {
         formData.append("pdfs", blob, "file.pdf");
 
         const res = await axios.post(
-          "http://165.232.116.238:5001/get_pdf_text",
+          process.env.PDF_TO_TEXT,
           formData,
           {
             headers: {

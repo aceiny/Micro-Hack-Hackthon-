@@ -22,10 +22,6 @@ import { ApiTags } from "@nestjs/swagger";
 @Controller("document")
 export class DocumentController {
   constructor(private readonly documentService: DocumentService) {}
-  @Get("")
-  GetDocuments() {
-    return "Get All Documents";
-  }
   @UseGuards(AuthGuard())
   @Post("upload")
   @UseInterceptors(FilesInterceptor("files", null, multerOptions))

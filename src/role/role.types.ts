@@ -11,4 +11,9 @@ export class CreateRoleDto {
   @IsNotEmpty()
   @ApiProperty()
   Description: string;
+
+  @IsString()
+  @IsNotEmpty()
+  @ApiProperty()
+  Role_Color : string;
 }

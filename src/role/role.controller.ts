@@ -25,9 +25,9 @@ export class RoleController {
   constructor(private readonly roleService: RoleService) {}
 
   @UseGuards(AuthGuard())
-  @Get("/:id")
+  @Get("/:OrganisationId")
   async GetRoles(
-    @Param("id", new ValidateObjectId()) OrganisationId: ObjectId,
+    @Param("OrganisationId", new ValidateObjectId()) OrganisationId: ObjectId,
   ) {
     return this.roleService.GetRoles(OrganisationId);
   }

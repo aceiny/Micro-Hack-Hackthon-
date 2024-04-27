@@ -29,6 +29,7 @@ export class DocumentService {
   ) {}
 
   async uploadFiles(files: any, UserId: ObjectId, UserRole: string) {
+    let Document_id;
     let Organisation_Id;
     if (UserRole == "ORGANISATION") {
       Organisation_Id = UserId;
@@ -97,10 +98,12 @@ export class DocumentService {
       };
       const Document = await this.documentModel.create(body);
       console.log(Document);
+      Document_id = Document._id
     }
 
     await archive.finalize();
     const ArchiveBody = {
+      Document_Id : Document_id,
       Path: `./uploads/${ArchiveName}.zip`,
       FileSize: output.bytesWritten / (1024 * 1024),
       Mimetype: "application/zip",

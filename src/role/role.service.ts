@@ -36,6 +36,7 @@ export class RoleService {
     if (!role) {
       throw new InternalServerErrorException("Role not created");
     }
+    console.log(role)
     return role;
   }
 }

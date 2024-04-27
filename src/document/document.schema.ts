@@ -52,6 +52,8 @@ export class Document extends Doc {
     default: false,
   })
   Is_Zip : boolean;
+  @Prop()
+  Document_Id : string
 }
 
 export const DocumentSchema = SchemaFactory.createForClass(Document);

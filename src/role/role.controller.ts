@@ -41,6 +41,8 @@ export class RoleController {
     @Body() RoleDto: CreateRoleDto,
     @GetUser() Organisation: any,
   ) {
+    console.log(RoleDto)
+    console.log(Organisation)
     return this.roleService.CreateRole(RoleDto, Organisation.Id);
   }
 }

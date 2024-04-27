@@ -45,19 +45,6 @@ https://dbdiagram.io/d/662b115d03593b6b6101dbf8
 7. **Read PDF Files Using AI:** Extract text from PDF files for easy access and searchability.
 8. **Talk About the Document with AI:** Interact with AI to discuss and analyze document content.
 9. **Use Redis Cache to Speed Up the Process:** Improve performance by caching frequently accessed data.
-## AI Services
-- **Audio to Text:** Convert audio files to text.
-- **Chat Bot:** Engage in discussions about document content.
-- **Describe Image:** Provide descriptions of image content.
-- **PDF to Text:** Extract text from PDF files.
-- **Document Summary:** Generate summaries of documents.
-
-
-## Installation and Setup
-- Clone the repository.
-- Install dependencies using `npm install`.
-- Configure environment variables.
-- Start the application using `npm start`.
 
 ## Usage
 - Create organizations and add workers.
@@ -74,14 +61,16 @@ https://dbdiagram.io/d/662b115d03593b6b6101dbf8
 - **Document Summary:** Generate summaries of documents.
 
 ## Technologies Used
+- TypeScript
 - Node.js
-- Express.js
+- Nest.js
+- Mongodb
+- Multer
 - Redis
 - AI Services (Audio to Text, Chat Bot, Describe Image, PDF to Text, Document Summary)
-
+- JWT
+- Jest
+- Form-Data
 ## Contributors
-- Your Name
-- Your Email Address
-
-## License
-This project is licensed under the MIT License - see the [LICENSE](L
+- ahmed yassine zeraibi
+- yzeraibi2000@estin.dz

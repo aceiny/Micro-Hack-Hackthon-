@@ -3,7 +3,8 @@ import { ObjectId } from "mongoose";
 import { ValidateObjectId } from "src/global/validate.objectid";
 import { DocumentVersionService } from "./document_version.service";
 import { AuthGuard } from "@nestjs/passport";
-
+import { ApiTags } from "@nestjs/swagger";
+@ApiTags("Document-Version")
 @Controller("document-version")
 export class DocumentVersionController {
   constructor(

@@ -4,6 +4,7 @@ import {
   Get,
   Param,
   Post,
+  Put,
   UseGuards,
   UsePipes,
   ValidationPipe,
@@ -21,6 +22,12 @@ import { ObjectId } from "mongoose";
 @Controller("user")
 export class UserController {
   constructor(private readonly userService: UserService) {}
+
+  @Get("/users/:OrganisationId")
+  @UseGuards(AuthGuard())
+  async GetUsers(@Param("OrganisationId") OrganisationId: ObjectId) {
+    return this.userService.GetUsers(OrganisationId);
+  }
 
   @UseGuards(AuthGuard())
   @UseGuards(RolesGuard)
@@ -51,5 +58,10 @@ export class UserController {
   @UseGuards(AuthGuard())
   async GetUserData(@GetUser() User: any) {
     return this.userService.GetUserData(User.Id, User.Role);
+  }
+  @Put('/:UserId')
+  @UseGuards(AuthGuard())
+  async UpdateUser(@Param('UserId') UserId: ObjectId, @Body() UpdateUserDto: CreateUserDto) {
+    return this.userService.UpdateUserDate(UserId, UpdateUserDto);
   }
 }

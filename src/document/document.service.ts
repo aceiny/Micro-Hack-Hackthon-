@@ -144,8 +144,7 @@ export class DocumentService {
         });
     
         await archive.finalize();
-}*/
-
+  }*/
     async GetAllOrganisationFiles(OrganisationId: ObjectId) {
         return this.documentModel.find({
             Organisation_Id : OrganisationId, 

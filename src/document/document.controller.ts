@@ -17,6 +17,8 @@ import { AuthGuard } from "@nestjs/passport";
 import { GetUser } from "src/jwt/get-user.decorator";
 import { ObjectId, isValidObjectId } from "mongoose";
 import { ValidateObjectId } from "src/global/validate.objectid";
+import { ApiTags } from "@nestjs/swagger";
+@ApiTags("Document")
 @Controller("document")
 export class DocumentController {
   constructor(private readonly documentService: DocumentService) {}

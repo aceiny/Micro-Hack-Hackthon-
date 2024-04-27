@@ -4,7 +4,8 @@ import { AccessControlService } from "./access_control.service";
 import { ObjectId, isValidObjectId } from "mongoose";
 import { ValidateObjectId } from "src/global/validate.objectid";
 import { AssignAccessControl } from "./access_controle.types";
-
+import { ApiTags } from "@nestjs/swagger";
+@ApiTags("Access Control")
 @Controller("access-control")
 export class AccessControlController {
   constructor(private readonly accesscontrolService: AccessControlService) {}

@@ -1,9 +1,1 @@
-add acces checker
-add zdding accescontrole  
-add adding docmiment verison 
-add getting all dov version 
-
-
-on creating document assign Global acces to global if no roles is specified 
-
-user : user-${id}
+edit user settings

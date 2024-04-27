@@ -4,18 +4,16 @@ import {
   Get,
   Param,
   Post,
-  Res,
   UploadedFiles,
   UseGuards,
   UseInterceptors,
 } from "@nestjs/common";
-import { MulterModule, FilesInterceptor } from "@nestjs/platform-express";
-import * as multer from "multer";
+import { FilesInterceptor } from "@nestjs/platform-express";
 import { DocumentService } from "./document.service";
 import { multerOptions } from "src/global/multer.options";
 import { AuthGuard } from "@nestjs/passport";
 import { GetUser } from "src/jwt/get-user.decorator";
-import { ObjectId, isValidObjectId } from "mongoose";
+import { ObjectId } from "mongoose";
 import { ValidateObjectId } from "src/global/validate.objectid";
 import { ApiTags } from "@nestjs/swagger";
 @ApiTags("Document")
@@ -40,12 +38,16 @@ export class DocumentController {
         return this.documentService.DownloadFiles(res , DocumentId)
     }*/
 
-    @Get('/:OrganisationID')
-    async GetAllOrganisationFiles(@Param('OrganisationID' , new ValidateObjectId()) OrganisationId : ObjectId) {
-        return this.documentService.GetAllOrganisationFiles(OrganisationId)
-    }
-    @Get('/one/:DocumentId')
-    async GetDocument(@Param('DocumentId' , new ValidateObjectId()) DocumentId : ObjectId) {
-        return this.documentService.GetDocument(DocumentId)
-    }
+  @Get("/:OrganisationID")
+  async GetAllOrganisationFiles(
+    @Param("OrganisationID", new ValidateObjectId()) OrganisationId: ObjectId,
+  ) {
+    return this.documentService.GetAllOrganisationFiles(OrganisationId);
+  }
+  @Get("/one/:DocumentId")
+  async GetDocument(
+    @Param("DocumentId", new ValidateObjectId()) DocumentId: ObjectId,
+  ) {
+    return this.documentService.GetDocument(DocumentId);
+  }
 }

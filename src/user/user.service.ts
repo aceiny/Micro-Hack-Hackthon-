@@ -23,7 +23,7 @@ export class UserService {
     private readonly jwtService: JwtService,
     private readonly redisService: RedisService,
   ) {}
-  async GetUsers(OrganisationId : ObjectId) {
+  async GetUsers(OrganisationId: ObjectId) {
     return this.userModel.find({
       Organisation_Id: OrganisationId,
     });
@@ -71,14 +71,18 @@ export class UserService {
         try {
           return this.redisService.GetKey(`user-${UserId}`);
         } catch (error) {
-          const user = await this.userModel.findById(UserId).populate('Organisation_Id' , '-Password');
+          const user = await this.userModel
+            .findById(UserId)
+            .populate("Organisation_Id", "-Password");
           if (!user) {
             throw new UnauthorizedException("User not found");
           }
           return user;
         }
       } else {
-        const user = await this.userModel.findById(UserId).populate('Organisation_Id' , '-Password');
+        const user = await this.userModel
+          .findById(UserId)
+          .populate("Organisation_Id", "-Password");
         if (!user) {
           throw new UnauthorizedException("User not found");
         }
@@ -94,14 +98,14 @@ export class UserService {
         try {
           return this.redisService.GetKey(`organisation-${UserId}`);
         } catch (error) {
-          const user = await this.organisationModel.findById(UserId)
+          const user = await this.organisationModel.findById(UserId);
           if (!user) {
             throw new UnauthorizedException("organisation not found");
           }
           return user;
         }
       } else {
-        const user = await this.organisationModel.findById(UserId)
+        const user = await this.organisationModel.findById(UserId);
         if (!user) {
           throw new UnauthorizedException("organisation not found");
         }

@@ -16,10 +16,12 @@ export class UserRoleService {
   ) {}
 
   async GetUserRoles(UserID: ObjectId) {
-    console.log(UserID)
-    return this.userRoleModel.find({
-      User_Id: UserID,
-    }).populate('Role_Id');
+    console.log(UserID);
+    return this.userRoleModel
+      .find({
+        User_Id: UserID,
+      })
+      .populate("Role_Id");
   }
   async AssignRoleToUser(RoleData: AssignUserRoleDto) {
     const userRoleExist = await this.userRoleModel.findOne({

@@ -2,22 +2,16 @@ import {
   Injectable,
   InternalServerErrorException,
   NotFoundException,
-  Res,
 } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Document } from "./document.schema";
 import { Model, ObjectId } from "mongoose";
 import * as fs from "fs";
 import * as archiver from "archiver";
-import path from "path";
-import { Organisation } from "src/organisation/organisation.schema";
 import { User } from "src/user/user.schema";
-import * as unzipper from "unzipper";
-import { NotFoundError } from "rxjs";
-import { Document_Version } from "src/document_version/document_version.schema";
 import { DocumentVersionService } from "src/document_version/document_version.service";
 import axios from "axios";
-import { FILE } from "dns";
+
 @Injectable()
 export class DocumentService {
   constructor(
@@ -70,15 +64,11 @@ export class DocumentService {
         const formData = new FormData();
         formData.append("pdfs", blob, "file.pdf");
 
-        const res = await axios.post(
-          process.env.PDF_TO_TEXT,
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
+        const res = await axios.post(process.env.PDF_TO_TEXT, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
           },
-        );
+        });
         fs.writeFileSync(
           `./uploads/${Filename}-text.txt`,
           JSON.stringify(res.data.text.replace(/\n/g, " ")),
@@ -98,12 +88,12 @@ export class DocumentService {
       };
       const Document = await this.documentModel.create(body);
       console.log(Document);
-      Document_id = Document._id
+      Document_id = Document._id;
     }
 
     await archive.finalize();
     const ArchiveBody = {
-      Document_Id : Document_id,
+      Document_Id: Document_id,
       Path: `./uploads/${ArchiveName}.zip`,
       FileSize: output.bytesWritten / (1024 * 1024),
       Mimetype: "application/zip",
@@ -117,48 +107,21 @@ export class DocumentService {
     const newDocument = await this.documentModel.create(ArchiveBody);
     return newDocument;
   }
-  /*async DownloadFiles(res: any, DocumentId: ObjectId) {
-        console.log(DocumentId)
-        const document = await this.documentModel.findById(DocumentId);
-        if (!document) {
-            throw new NotFoundException('Document not found');
-        }
-    
-        const zipFileStream = fs.createReadStream(document.Path);
-        const downloadFolderPath = './download'; // Adjust this path as needed
-        fs.mkdirSync(downloadFolderPath, { recursive: true });
-    
-        await zipFileStream.pipe(unzipper.Extract({ path: downloadFolderPath })).promise();
-    
-        // Create a new zip file from the extracted files
-        const archive = archiver('zip', {
-            zlib: { level: 9 } // Sets the compression level.
-        });
-    
-        // This is the name of the zip file to be downloaded
-        res.attachment('download.zip');
-    
-        // This pipes the archive data to the response
-        archive.pipe(res);
-    
-        fs.readdirSync(downloadFolderPath).forEach((file) => {
-            const filePath = path.join(downloadFolderPath, file);
-            archive.file(filePath, { name: file });
-        });
-    
-        await archive.finalize();
-  }*/
-    async GetAllOrganisationFiles(OrganisationId: ObjectId) {
-        return this.documentModel.find({
-            Organisation_Id : OrganisationId, 
-            Is_Zip: false
-        }).populate('Document_Author' , '-Password')
+  async GetAllOrganisationFiles(OrganisationId: ObjectId) {
+    return this.documentModel
+      .find({
+        Organisation_Id: OrganisationId,
+        Is_Zip: false,
+      })
+      .populate("Document_Author", "-Password");
+  }
+  async GetDocument(DocumentId: ObjectId) {
+    const document = await this.documentModel
+      .findById(DocumentId)
+      .populate("Document_Author", "-Password");
+    if (!document) {
+      throw new NotFoundException("Document not found");
     }
-    async GetDocument(DocumentId: ObjectId) {
-      const document = await this.documentModel.findById(DocumentId).populate('Document_Author' , '-Password')
-      if (!document) {
-          throw new NotFoundException('Document not found');
-      }
-      return document;
-    }
- }
+    return document;
+  }
+}

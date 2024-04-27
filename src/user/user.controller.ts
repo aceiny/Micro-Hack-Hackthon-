@@ -59,9 +59,12 @@ export class UserController {
   async GetUserData(@GetUser() User: any) {
     return this.userService.GetUserData(User.Id, User.Role);
   }
-  @Put('/:UserId')
+  @Put("/:UserId")
   @UseGuards(AuthGuard())
-  async UpdateUser(@Param('UserId') UserId: ObjectId, @Body() UpdateUserDto: CreateUserDto) {
+  async UpdateUser(
+    @Param("UserId") UserId: ObjectId,
+    @Body() UpdateUserDto: CreateUserDto,
+  ) {
     return this.userService.UpdateUserDate(UserId, UpdateUserDto);
   }
 }

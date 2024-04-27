@@ -149,10 +149,10 @@ export class DocumentService {
         return this.documentModel.find({
             Organisation_Id : OrganisationId, 
             Is_Zip: false
-        })
+        }).populate('Document_Author' , '-Password')
     }
     async GetDocument(DocumentId: ObjectId) {
-      const document = await this.documentModel.findById(DocumentId);
+      const document = await this.documentModel.findById(DocumentId).populate('Document_Author' , '-Password')
       if (!document) {
           throw new NotFoundException('Document not found');
       }

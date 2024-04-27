@@ -17,6 +17,7 @@ import { NotFoundError } from "rxjs";
 import { Document_Version } from "src/document_version/document_version.schema";
 import { DocumentVersionService } from "src/document_version/document_version.service";
 import axios from "axios";
+import { FILE } from "dns";
 @Injectable()
 export class DocumentService {
   constructor(
@@ -68,15 +69,22 @@ export class DocumentService {
         const formData = new FormData();
         formData.append("pdfs", blob, "file.pdf");
 
-        const res = await axios.post("http://165.232.116.238:5001/get_pdf_text", formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
+        const res = await axios.post(
+          "http://165.232.116.238:5001/get_pdf_text",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
           },
-        });
-        fs.writeFileSync(`./uploads/${Filename}-text.txt`, JSON.stringify(res.data.text.replace(/\n/g, ' ')));
-    }
-    // end of read pdf from file
-       const body = {
+        );
+        fs.writeFileSync(
+          `./uploads/${Filename}-text.txt`,
+          JSON.stringify(res.data.text.replace(/\n/g, " ")),
+        );
+      }
+      // end of read pdf from file
+      const body = {
         FileSize,
         Mimetype,
         Filename,
@@ -85,27 +93,27 @@ export class DocumentService {
         Path,
         Document_Author: UserId,
         Organisation_Id,
-        Text_Path : `./uploads/${Filename}-text.txt`
+        Text_Path: `./uploads/${Filename}-text.txt`,
       };
-        const Document = await this.documentModel.create(body);  
-        console.log(Document)
-      }
-
-      await archive.finalize();
-      const ArchiveBody = {
-        Path: `./uploads/${ArchiveName}.zip`,
-        FileSize: output.bytesWritten / (1024 * 1024),
-        Mimetype: "application/zip",
-        Filename: `${ArchiveName}.zip`,
-        Original_Name: `${ArchiveName}.zip`,
-        Encoding: "zip",
-        Document_Author: UserId,
-        Organisation_Id,
-      };
-      const newDocument = await this.documentModel.create(ArchiveBody);
-      return newDocument;
+      const Document = await this.documentModel.create(body);
+      console.log(Document);
     }
-    /*async DownloadFiles(res: any, DocumentId: ObjectId) {
+
+    await archive.finalize();
+    const ArchiveBody = {
+      Path: `./uploads/${ArchiveName}.zip`,
+      FileSize: output.bytesWritten / (1024 * 1024),
+      Mimetype: "application/zip",
+      Filename: `${ArchiveName}.zip`,
+      Original_Name: `${ArchiveName}.zip`,
+      Encoding: "zip",
+      Document_Author: UserId,
+      Organisation_Id,
+    };
+    const newDocument = await this.documentModel.create(ArchiveBody);
+    return newDocument;
+  }
+  /*async DownloadFiles(res: any, DocumentId: ObjectId) {
         console.log(DocumentId)
         const document = await this.documentModel.findById(DocumentId);
         if (!document) {
@@ -137,4 +145,9 @@ export class DocumentService {
         await archive.finalize();
 }*/
 
-}
+    async GetAllOrganisationFiles(OrganisationId: ObjectId) {
+        return this.documentModel.find({
+            Organisation_Id : OrganisationId
+        })
+    }
+ }

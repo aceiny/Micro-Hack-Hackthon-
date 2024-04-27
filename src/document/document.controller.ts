@@ -41,4 +41,9 @@ export class DocumentController {
     async downloadFiles(@Res() res : any , @Param('id' , new ValidateObjectId() ) DocumentId: ObjectId) {
         return this.documentService.DownloadFiles(res , DocumentId)
     }*/
+
+    @Get('/:OrganisationID')
+    async GetAllOrganisationFiles(@Param('OrganisationID' , new ValidateObjectId()) OrganisationId : ObjectId) {
+        return this.documentService.GetAllOrganisationFiles(OrganisationId)
+    }
 }

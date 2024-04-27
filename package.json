@@ -37,6 +37,7 @@
     "ioredis": "^5.4.1",
     "mongoose": "^8.0.3",
     "multer": "^1.4.5-lts.1",
+    "nestjs-rate-limiter": "^3.1.0",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
     "pdfjs-dist": "^4.1.392",

@@ -151,4 +151,11 @@ export class DocumentService {
             Is_Zip: false
         })
     }
+    async GetDocument(DocumentId: ObjectId) {
+      const document = await this.documentModel.findById(DocumentId);
+      if (!document) {
+          throw new NotFoundException('Document not found');
+      }
+      return document;
+    }
  }

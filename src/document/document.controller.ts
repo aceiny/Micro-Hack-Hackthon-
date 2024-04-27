@@ -44,7 +44,7 @@ export class DocumentController {
     async GetAllOrganisationFiles(@Param('OrganisationID' , new ValidateObjectId()) OrganisationId : ObjectId) {
         return this.documentService.GetAllOrganisationFiles(OrganisationId)
     }
-    @Get('/document/:DocumentId')
+    @Get('/one/:DocumentId')
     async GetDocument(@Param('DocumentId' , new ValidateObjectId()) DocumentId : ObjectId) {
         return this.documentService.GetDocument(DocumentId)
     }

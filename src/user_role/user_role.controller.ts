@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Post, UseGuards, UsePipes, ValidationPipe } from "@nestjs/common";
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  UseGuards,
+  UsePipes,
+  ValidationPipe,
+} from "@nestjs/common";
 import { UserRoleService } from "./user_role.service";
 import { AssignUserRoleDto } from "./user_schema.types";
 import { Roles } from "src/jwt/roles.decorator";
@@ -13,7 +21,7 @@ export class UserRoleController {
   constructor(private readonly userRoleService: UserRoleService) {}
   @Get()
   @UseGuards(AuthGuard())
-  async GetUserRoles(@GetUser() User : any) {
+  async GetUserRoles(@GetUser() User: any) {
     return this.userRoleService.GetUserRoles(User.Id);
   }
   @Post()

@@ -17,9 +17,9 @@ export class Access_Control extends Doc {
   Role_Id: ObjectId;
 
   @Prop({
-    default : false
+    default: false,
   })
-  Blocked : boolean 
+  Blocked: boolean;
   @Prop()
   Can_View: boolean;
   @Prop()

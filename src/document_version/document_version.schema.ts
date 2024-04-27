@@ -10,12 +10,12 @@ export class Document_Version extends Doc {
     ref: "Document",
   })
   Document_Id: ObjectId;
-  
+
   @Prop()
   Version_Number: number;
 
   @Prop()
-  Path : string
+  Path: string;
 }
 
 export const Document_VersionSchema =

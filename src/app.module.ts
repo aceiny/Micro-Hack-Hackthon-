@@ -8,7 +8,7 @@ import { DocumentVersionModule } from "./document_version/document_version.modul
 import { RoleModule } from "./role/role.module";
 import { UserRoleModule } from "./user_role/user_role.module";
 import { AccessControlModule } from "./access_control/access_control.module";
-import { RedisModule } from './redis/redis.module';
+import { RedisModule } from "./redis/redis.module";
 require("dotenv").config();
 @Module({
   imports: [

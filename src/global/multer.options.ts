@@ -1,11 +1,11 @@
-import { diskStorage } from 'multer';
-import * as fs from 'fs';
+import { diskStorage } from "multer";
+import * as fs from "fs";
 
 const storage = diskStorage({
-  destination: './uploads',
+  destination: "./uploads",
   filename: (_, file, callback) => {
     callback(null, `${Date.now()}-${file.originalname}`);
-  }
+  },
 });
 
 export const multerOptions = {
@@ -28,6 +28,6 @@ export const multerOptions = {
         });
       });
     },
-    _removeFile: storage._removeFile
-  }
+    _removeFile: storage._removeFile,
+  },
 };

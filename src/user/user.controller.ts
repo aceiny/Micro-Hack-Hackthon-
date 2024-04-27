@@ -39,17 +39,17 @@ export class UserController {
     return this.userService.LoginUser(LoginDto);
   }
 
-  @Get('/:token')
+  @Get("/:token")
   @UseGuards(AuthGuard())
-  async CheckUserToken(@Param('token') Token : string) {
+  async CheckUserToken(@Param("token") Token: string) {
     return {
-      Message : "valid token",
-      StatusCode : 200,
-    }
+      Message: "valid token",
+      StatusCode: 200,
+    };
   }
-  @Get('')
+  @Get("")
   @UseGuards(AuthGuard())
-  async GetUserData(@GetUser() User : any){
-    return this.userService.GetUserData(User.Id , User.Role )
+  async GetUserData(@GetUser() User: any) {
+    return this.userService.GetUserData(User.Id, User.Role);
   }
 }

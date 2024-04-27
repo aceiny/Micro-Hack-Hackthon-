@@ -62,49 +62,48 @@ export class UserService {
       Token: this.jwtService.sign({ Id: user._id, Role: AccountType.WORKER }),
     };
   }
-  async GetUserData( UserId : ObjectId , UserRole : string){
+  async GetUserData(UserId: ObjectId, UserRole: string) {
     if (UserRole == AccountType.WORKER) {
-      const IsCashed = await this.redisService.KeyExists(`user-${UserId}`)
-      if(IsCashed) {
+      const IsCashed = await this.redisService.KeyExists(`user-${UserId}`);
+      if (IsCashed) {
         try {
           return this.redisService.GetKey(`user-${UserId}`);
         } catch (error) {
-          const user = await this.userModel.findById(UserId)
-          if(!user) {
-            throw new UnauthorizedException("User not found")
+          const user = await this.userModel.findById(UserId);
+          if (!user) {
+            throw new UnauthorizedException("User not found");
           }
-          return user
+          return user;
         }
-      }
-      else {
-        const user = await this.userModel.findById(UserId)
-        if(!user) {
-          throw new UnauthorizedException("User not found")
+      } else {
+        const user = await this.userModel.findById(UserId);
+        if (!user) {
+          throw new UnauthorizedException("User not found");
         }
-        await this.redisService.SetKey(`user-${UserId}` , user)
-        return user
+        await this.redisService.SetKey(`user-${UserId}`, user);
+        return user;
       }
-    }
-    else {
-      const IsCashed = await this.redisService.KeyExists(`organisation-${UserId}`)
-      if(IsCashed) {
+    } else {
+      const IsCashed = await this.redisService.KeyExists(
+        `organisation-${UserId}`,
+      );
+      if (IsCashed) {
         try {
           return this.redisService.GetKey(`organisation-${UserId}`);
         } catch (error) {
-          const user = await this.organisationModel.findById(UserId)
-          if(!user) {
-            throw new UnauthorizedException("organisation not found")
+          const user = await this.organisationModel.findById(UserId);
+          if (!user) {
+            throw new UnauthorizedException("organisation not found");
           }
-          return user
+          return user;
         }
-      }
-      else {
-        const user = await this.organisationModel.findById(UserId)
-        if(!user) {
-          throw new UnauthorizedException("organisation not found")
+      } else {
+        const user = await this.organisationModel.findById(UserId);
+        if (!user) {
+          throw new UnauthorizedException("organisation not found");
         }
-        await this.redisService.SetKey(`organisation-${UserId}` , user)
-        return user
+        await this.redisService.SetKey(`organisation-${UserId}`, user);
+        return user;
       }
     }
   }

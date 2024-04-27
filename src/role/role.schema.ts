@@ -16,9 +16,9 @@ export class Role extends Document {
   Description: string;
 
   @Prop({
-    default : "#FFFFFFF"
+    default: "#FFFFFFF",
   })
-  Role_Color : string
+  Role_Color: string;
 }
 
 export const RoleSchema = SchemaFactory.createForClass(Role);

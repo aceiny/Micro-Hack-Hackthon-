@@ -13,17 +13,17 @@ export class Document extends Doc {
   @Prop()
   FileSize: number;
   @Prop()
-  Mimetype : string;
+  Mimetype: string;
   @Prop()
-  Filename : string;
+  Filename: string;
   @Prop()
-  Original_Name : string;
+  Original_Name: string;
   @Prop()
-  Encoding : string;
+  Encoding: string;
   @Prop()
-  Path : string;
+  Path: string;
   @Prop({
-    default : 1
+    default: 1,
   })
   Current_Version: number;
 
@@ -45,9 +45,9 @@ export class Document extends Doc {
   Organisation_Id: ObjectId;
 
   @Prop({
-    default : ""
+    default: "",
   })
-  Text_Path : string;
+  Text_Path: string;
 }
 
 export const DocumentSchema = SchemaFactory.createForClass(Document);

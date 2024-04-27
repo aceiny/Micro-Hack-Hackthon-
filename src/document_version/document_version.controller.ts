@@ -6,13 +6,15 @@ import { AuthGuard } from "@nestjs/passport";
 
 @Controller("document-version")
 export class DocumentVersionController {
-    constructor(
-        private readonly documentVersionService : DocumentVersionService
-    ){}
+  constructor(
+    private readonly documentVersionService: DocumentVersionService,
+  ) {}
 
-    @Get('/:document')
-    @UseGuards(AuthGuard())
-    async GetDocumentVersions(@Param('document' , new ValidateObjectId()) DocumentId : ObjectId) {
-        return this.documentVersionService.GetDocumentVersions(DocumentId)
-    }
+  @Get("/:document")
+  @UseGuards(AuthGuard())
+  async GetDocumentVersions(
+    @Param("document", new ValidateObjectId()) DocumentId: ObjectId,
+  ) {
+    return this.documentVersionService.GetDocumentVersions(DocumentId);
+  }
 }

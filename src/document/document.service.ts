@@ -109,6 +109,7 @@ export class DocumentService {
       Encoding: "zip",
       Document_Author: UserId,
       Organisation_Id,
+      Is_Zip: true,
     };
     const newDocument = await this.documentModel.create(ArchiveBody);
     return newDocument;
@@ -147,7 +148,8 @@ export class DocumentService {
 
     async GetAllOrganisationFiles(OrganisationId: ObjectId) {
         return this.documentModel.find({
-            Organisation_Id : OrganisationId
+            Organisation_Id : OrganisationId, 
+            Is_Zip: false
         })
     }
  }

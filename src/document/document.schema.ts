@@ -48,6 +48,10 @@ export class Document extends Doc {
     default: "",
   })
   Text_Path: string;
+  @Prop({
+    default: false,
+  })
+  Is_Zip : boolean;
 }
 
 export const DocumentSchema = SchemaFactory.createForClass(Document);

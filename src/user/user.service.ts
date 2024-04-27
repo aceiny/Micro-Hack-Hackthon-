@@ -94,14 +94,14 @@ export class UserService {
         try {
           return this.redisService.GetKey(`organisation-${UserId}`);
         } catch (error) {
-          const user = await this.organisationModel.findById(UserId).populate('Organisation_Id' , '-Password');
+          const user = await this.organisationModel.findById(UserId)
           if (!user) {
             throw new UnauthorizedException("organisation not found");
           }
           return user;
         }
       } else {
-        const user = await this.organisationModel.findById(UserId).populate('Organisation_Id' , '-Password');
+        const user = await this.organisationModel.findById(UserId)
         if (!user) {
           throw new UnauthorizedException("organisation not found");
         }
